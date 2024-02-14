@@ -12,8 +12,8 @@ export default function SignUpForm({ setToken }) {
     try {
       // Validation
       if (!username) {
-        setUsernameError("theflashisr is required");
-        throw new Error("theflashisr is required");
+        setUsernameError("Username is required");
+        throw new Error("Username is required");
       } else if (username.length !== 10) {
         setUsernameError("Username must be 10 characters");
         throw new Error("Invalid username");
@@ -29,8 +29,8 @@ export default function SignUpForm({ setToken }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: theflashisr,
-          password: password,
+          username:  username, "the username is: theflashisfastest"
+          password:   password, "the password is: password1234"
         }),
       });
 
