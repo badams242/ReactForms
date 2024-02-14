@@ -29,7 +29,7 @@ export default function SignUpForm({ setToken }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: theflashisfast,
+          username: theflashisr,
           password: password,
         }),
       });
