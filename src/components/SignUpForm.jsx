@@ -4,7 +4,6 @@ export default function SignUpForm({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
-  const [passwordError] = useState("");
   const [error, setError] = useState(null);
 
   async function handleSubmit(event) {
@@ -18,11 +17,11 @@ export default function SignUpForm({ setToken }) {
       } else if (username.length !== 10) {
         setUsernameError("Username must be 10 characters");
         throw new Error("Invalid username");
-      }else {
+      } else {
         setUsernameError("");
       }
 
-      // You can add more validation for the password if needed
+      
 
       const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup", {
         method: "POST",
@@ -30,8 +29,8 @@ export default function SignUpForm({ setToken }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: Spidermans(username),
-          password: biscuit(password),
+          username: username,
+          password: password,
         }),
       });
 
@@ -61,8 +60,9 @@ export default function SignUpForm({ setToken }) {
             id="username"
             name="username"
             value={username}
-            onChange={(e) => {setUsername(e.target.value);
-            setUsernameError("favorite marvel character");
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setUsernameError(""); // Clearing the error when the username changes
             }}
           />
         </label>
@@ -76,12 +76,11 @@ export default function SignUpForm({ setToken }) {
             name="password"
             type="password"
             value={password}
-            onChange={(e) => {setPassword(e.target.value);
-            setUsernameError("favorite food");
+            onChange={(e) => {
+              setPassword(e.target.value);
             }}
           />
         </label>
-        {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
         <br />
 
         <button type="submit">Submit</button>
