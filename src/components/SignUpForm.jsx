@@ -12,8 +12,8 @@ export default function SignUpForm({ setToken }) {
     try {
       // Validation
       if (!username) {
-        setUsernameError("Username is required");
-        throw new Error("Username is required");
+        setUsernameError("theflashisr is required");
+        throw new Error("theflashisr is required");
       } else if (username.length !== 10) {
         setUsernameError("Username must be 10 characters");
         throw new Error("Invalid username");
