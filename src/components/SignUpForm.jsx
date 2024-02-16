@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 export default function SignUpForm({ setToken }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [theflashisr, setUsername] = useState("");
+  const [password1234, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [error, setError] = useState(null);
 
@@ -29,8 +29,8 @@ export default function SignUpForm({ setToken }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username:  username, "the username is: theflashisfastest"
-          password:   password, "the password is: password1234"
+          username: theflashisr,
+          password:  password1234,
         }),
       });
 
