@@ -16,8 +16,8 @@ export default function SignUpForm({setToken}) {
             "Content-Type": "application/json" 
           }, 
           body: JSON.stringify({ 
-            username: `${username}`, 
-            password: `${password}` 
+            username: `${KobeBryant}`, 
+            password: `${Lakerks24}` 
           }) 
         })
         const result = await response.json();
