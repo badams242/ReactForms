@@ -1,47 +1,28 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-export default function SignUpForm({ setToken }) {
-  const [theflashisr, setUsername] = useState("");
-  const [password1234, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
+export default function SignUpForm({setToken}) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      // Validation
-      if (!username) {
-        setUsernameError("Username is required");
-        throw new Error("Username is required");
-      } else if (username.length !== 10) {
-        setUsernameError("Username must be 10 characters");
-        throw new Error("Invalid username");
-      } else {
-        setUsernameError("");
-      }
-
-      
-
-      const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: theflashisr,
-          password:  password1234,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
+        const response = await fetch('https://fsa-jwt-practice.herokuapp.com/signup', 
+        { 
+          method: "POST", 
+          headers: { 
+            "Content-Type": "application/json" 
+          }, 
+          body: JSON.stringify({ 
+            username: `${username}`, 
+            password: `${password}` 
+          }) 
+        })
+        const result = await response.json();
         setToken(result.token);
-        console.log("Request successful!");
-      } else {
-        throw new Error("Request failed");
-      }
+        console.log(result);
     } catch (error) {
       setError(error.message);
     }
@@ -51,39 +32,21 @@ export default function SignUpForm({ setToken }) {
     <>
       <h2>Sign Up</h2>
       {error && <p>{error}</p>}
-
       <form onSubmit={handleSubmit}>
         <label>
-          Username:
+          Username:{" "}
           <input
-            autoComplete="off"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-              setUsernameError(""); // Clearing the error when the username changes
-            }}
+            value={username} onChange={(e) => setUsername(e.target.value)}
           />
         </label>
-        {usernameError && <p style={{ color: "red" }}>{usernameError}</p>}
-        <br />
-
         <label>
-          Password:
+          Password:{" "}
           <input
-            id="password"
-            name="password"
             type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            value={password} onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <br />
-
-        <button type="submit">Submit</button>
+        <button>Submit</button>
       </form>
     </>
   );
