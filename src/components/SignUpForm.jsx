@@ -1,28 +1,33 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 
-export default function SignUpForm({setToken}) {
-  const [username, KobeBryant] = useState("");
-  const [password, Lakerks24] = useState("");
+export default function SignUpForm({ setToken }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-        const response = await fetch('https://fsa-jwt-practice.herokuapp.com/signup', 
-        { 
-          method: "POST", 
-          headers: { 
-            "Content-Type": "application/json" 
-          }, 
-          body: JSON.stringify({ 
-            username: `${KobeBryant}`, 
-            password: `${Lakerks24}` 
-          }) 
-        })
-        const result = await response.json();
-        setToken(result.token);
-        console.log(result);
+      const response = await fetch('https://fsa-jwt-practice.herokuapp.com/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to sign up');
+      }
+
+      const result = await response.json(); // Parse response into JSON
+      setToken(result.token); // Set token from response
+
+      // Reset form fields on successful submission
+      setUsername('');
+      setPassword('');
+      setError(null);
     } catch (error) {
       setError(error.message);
     }
@@ -34,19 +39,21 @@ export default function SignUpForm({setToken}) {
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>
-          Username:{""}
+          Username:
           <input
-            value={username} onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </label>
         <label>
-          Password:{""}
+          Password:
           <input
             type="password"
-            value={password} onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
