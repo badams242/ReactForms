@@ -25,8 +25,8 @@ export default function SignUpForm({ setToken }) {
       setToken(result.token); // Set token from response
 
       // Reset form fields on successful submission
-      setUsername('');
-      setPassword('');
+      setUsername('KobeBryant');
+      setPassword('Lakers24');
       setError(null);
     } catch (error) {
       setError(error.message);
