@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export default function SignUpForm({setToken}) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, KobeBryant] = useState("");
+  const [password, Lakerks24] = useState("");
   const [error, setError] = useState(null);
 
   async function handleSubmit(event) {
