@@ -10,24 +10,28 @@ export default function SignUpForm({ setToken }) {
 
     try {
       const response = await fetch('https://fsa-jwt-practice.herokuapp.com/signup', {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({
+          username: "Rocket",
+          password: "Raccoon"
+        })
       });
 
       if (!response.ok) {
         throw new Error('Failed to sign up');
       }
 
-      const result = await response.json(); // Parse response into JSON
-      setToken(result.token); // Set token from response
-
       // Reset form fields on successful submission
-      setUsername('KobeBryant');
-      setPassword('Lakers24');
+      setUsername('');
+      setPassword('');
       setError(null);
+
+      const result = await response.json();
+      console.log(result); // Log the result to the console
+      setToken(result.token); // Set token from response
     } catch (error) {
       setError(error.message);
     }

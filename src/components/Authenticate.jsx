@@ -7,16 +7,23 @@ export default function Authenticate({ token }) {
   async function handleClick() {
     try {
       const response = await fetch('https://fsa-jwt-practice.herokuapp.com/authenticate', {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         }
       });
 
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Invalid or expired token. Please log in again.');
+        } else {
+          throw new Error('Failed to authenticate. Please try again later.');
+        }
+      }
+
       const result = await response.json();
       setSuccessMessage(result.message);
-
     } catch (error) {
       setError(error.message);
     }
